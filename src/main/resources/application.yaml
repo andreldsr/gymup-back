@@ -10,6 +10,7 @@ spring:
     properties:
       jdbc:
         time_zone: UTC
+    show-sql: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: org.postgresql.Driver
