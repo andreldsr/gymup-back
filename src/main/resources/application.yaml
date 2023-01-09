@@ -1,0 +1,24 @@
+spring:
+  main:
+    banner-mode: log
+  profiles:
+    active: ${ENV_PROFILE:local}
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+    properties:
+      jdbc:
+        time_zone: UTC
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/gymup
+    username: gymup
+    password: gymup
+    hikari:
+      pool-name: gymup-connection-pool
+      maximum-pool-size: 10
+springdoc:
+  api-docs:
+    enabled: true

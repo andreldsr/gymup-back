@@ -1,0 +1,16 @@
+version: "3.7"
+services:
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: gymup
+      POSTGRES_PASSWORD: gymup
+      POSTGRES_DB: gymup
+    volumes:
+      - postgres-volume:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+
+volumes:
+  postgres-volume:
