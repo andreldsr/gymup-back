@@ -1,11 +1,11 @@
 CREATE TABLE IF NOT EXISTS extra
 (
-    id          BIGSERIAL NOT NULL,
-    identifier  UUID,
-    description TEXT,
-    order_number     INTEGER   NOT NULL,
-    type        VARCHAR(255),
-    exercise_id BIGINT,
+    id           BIGSERIAL NOT NULL,
+    identifier   UUID,
+    description  TEXT,
+    order_number INTEGER   NOT NULL,
+    type         VARCHAR(255),
+    exercise_id  BIGINT,
     CONSTRAINT pk_extra PRIMARY KEY (id)
 );
 
