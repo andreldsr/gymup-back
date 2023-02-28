@@ -5,7 +5,6 @@ import com.github.andreldsr.gymup.domain.exercise.dto.ExerciseListDto
 import com.github.andreldsr.gymup.domain.exercise.dto.ExtraListDto
 import com.github.andreldsr.gymup.domain.exercise.dto.toDetailDto
 import com.github.andreldsr.gymup.domain.exercise.dto.toListDto
-import com.github.andreldsr.gymup.domain.exercise.exception.ExerciseNotFoundException
 import com.github.andreldsr.gymup.domain.exercise.form.ExerciseCreateForm
 import com.github.andreldsr.gymup.domain.exercise.form.ExtraCreateForm
 import com.github.andreldsr.gymup.domain.exercise.form.toModel
@@ -38,7 +37,7 @@ class ExerciseServiceImpl(private val exerciseDatasource: ExerciseGateway, priva
     }
 
     override fun findByIdentifier(identifier: UUID): ExerciseDetailDto? {
-        val detailDto = exerciseDatasource.findByIdentifier(identifier)?.toDetailDto() ?: throw ExerciseNotFoundException(identifier)
+        val detailDto = exerciseDatasource.findByIdentifier(identifier).toDetailDto()
         return detailDto.copy(extras = getExtras(identifier))
     }
 

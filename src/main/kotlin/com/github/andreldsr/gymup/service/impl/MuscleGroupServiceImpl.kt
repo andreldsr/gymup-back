@@ -1,10 +1,10 @@
 package com.github.andreldsr.gymup.service.impl
 
-import com.github.andreldsr.gymup.gateway.musclegroup.MuscleGroupGateway
 import com.github.andreldsr.gymup.domain.musclegroup.dto.MuscleGroupListDto
 import com.github.andreldsr.gymup.domain.musclegroup.dto.toListDto
 import com.github.andreldsr.gymup.domain.musclegroup.form.MuscleGroupCreateForm
 import com.github.andreldsr.gymup.domain.musclegroup.form.toModel
+import com.github.andreldsr.gymup.gateway.musclegroup.MuscleGroupGateway
 import com.github.andreldsr.gymup.service.MuscleGroupService
 import org.springframework.stereotype.Service
 import java.util.UUID

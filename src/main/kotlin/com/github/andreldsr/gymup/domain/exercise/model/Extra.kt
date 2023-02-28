@@ -8,7 +8,7 @@ data class Extra(
     val description: String,
     val order: Int = 0,
     val type: ExtraType,
-    val exercise: Exercise,
+    val exercise: Exercise
 )
 
 enum class ExtraType {

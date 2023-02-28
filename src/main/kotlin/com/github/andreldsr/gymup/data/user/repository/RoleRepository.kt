@@ -7,6 +7,5 @@ import java.util.UUID
 interface RoleRepository : JpaRepository<RoleEntity, Long> {
     fun findByUsers_Identifier(userIdentifier: UUID): List<RoleEntity>
     fun findByName(name: String): RoleEntity
-
     fun findByIdentifier(identifier: UUID): RoleEntity
 }

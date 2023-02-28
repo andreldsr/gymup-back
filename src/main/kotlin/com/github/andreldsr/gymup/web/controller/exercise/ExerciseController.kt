@@ -50,5 +50,4 @@ class ExerciseController(private val exerciseService: ExerciseService) {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(tags = ["Exercise extras"], description = "Delete exercise")
     fun removeExtra(@PathVariable identifier: UUID) = exerciseService.removeExtra(identifier)
-
 }

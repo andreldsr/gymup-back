@@ -8,4 +8,4 @@ data class UserCreateForm(
     val password: String
 )
 
-fun UserCreateForm.toModel() = User(name= name, email = email, password = password)
+fun UserCreateForm.toModel() = User(name = name, email = email, password = password)

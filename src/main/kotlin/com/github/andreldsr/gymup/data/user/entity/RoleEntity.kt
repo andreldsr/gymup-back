@@ -17,15 +17,18 @@ import java.util.UUID
 @Entity
 @Table(name = "role")
 data class RoleEntity(
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
     val identifier: UUID = UUID.randomUUID(),
     val name: String,
     @ManyToMany(fetch = FetchType.LAZY)
-    var users: List<UserEntity> = emptyList(),
-    @CreatedDate @Column(name = "created_at")
+    var users: MutableSet<UserEntity> = mutableSetOf(),
+    @CreatedDate
+    @Column(name = "created_at")
     val createdAt: LocalDateTime = LocalDateTime.now(),
-    @UpdateTimestamp @Column(name = "updated_at")
+    @UpdateTimestamp
+    @Column(name = "updated_at")
     val updatedAt: LocalDateTime = LocalDateTime.now()
 )
 

@@ -15,7 +15,8 @@ import java.util.UUID
 @Entity
 @Table(name = "muscle_group")
 data class MuscleGroupEntity(
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long,
     val identifier: UUID,
     val name: String,

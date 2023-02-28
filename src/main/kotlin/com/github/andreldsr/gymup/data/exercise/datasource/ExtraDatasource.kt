@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository
 import java.util.UUID
 
 @Repository
-class ExtraDatasource(private val extraRepository: ExtraRepository, private val exerciseRepository: ExerciseRepository): ExtraGateway {
+class ExtraDatasource(private val extraRepository: ExtraRepository, private val exerciseRepository: ExerciseRepository) : ExtraGateway {
     override fun create(extra: Extra): Extra {
         val exercise = exerciseRepository.findByIdentifier(extra.exercise.identifier) ?: throw ExerciseNotFoundException(extra.exercise.identifier)
         return extraRepository.save(extra.toEntity().copy(exercise = exercise)).toModel()

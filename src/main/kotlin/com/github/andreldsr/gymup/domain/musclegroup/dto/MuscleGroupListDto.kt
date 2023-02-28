@@ -9,5 +9,6 @@ data class MuscleGroupListDto(
 )
 
 fun MuscleGroup.toListDto() = MuscleGroupListDto(
-    identifier, name
+    identifier,
+    name
 )

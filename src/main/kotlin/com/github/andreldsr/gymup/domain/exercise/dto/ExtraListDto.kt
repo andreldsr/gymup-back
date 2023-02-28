@@ -11,5 +11,8 @@ data class ExtraListDto(
 )
 
 fun Extra.toListDto() = ExtraListDto(
-    description, order, exercise.name, type
+    description,
+    order,
+    exercise.name,
+    type
 )

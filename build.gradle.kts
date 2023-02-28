@@ -8,6 +8,7 @@ plugins {
     kotlin("plugin.spring") version "1.7.22"
     kotlin("plugin.jpa") version "1.7.22"
     id("org.flywaydb.flyway") version "9.8.1"
+    id("org.jmailen.kotlinter") version "3.13.0"
 }
 
 group = "com.github.andreldsr"

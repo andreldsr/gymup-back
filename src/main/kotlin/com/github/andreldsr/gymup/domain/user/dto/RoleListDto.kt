@@ -5,7 +5,7 @@ import java.util.UUID
 
 data class RoleListDto(
     val identifier: UUID,
-    val name: String,
+    val name: String
 )
 
 fun Role.toListDto() = RoleListDto(identifier, name)

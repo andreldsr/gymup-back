@@ -18,23 +18,26 @@ import java.util.UUID
 
 @Entity
 @Table(name = "exercise")
-data class ExerciseEntity (
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+data class ExerciseEntity(
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long,
     val identifier: UUID,
     val name: String,
     val description: String,
     @ManyToOne
     val group: MuscleGroupEntity? = null,
-    @CreatedDate @Column(name = "created_at")
+    @CreatedDate
+    @Column(name = "created_at")
     val createdAt: LocalDateTime = LocalDateTime.now(),
-    @UpdateTimestamp @Column(name = "updated_at")
+    @UpdateTimestamp
+    @Column(name = "updated_at")
     val updatedAt: LocalDateTime = LocalDateTime.now()
 )
 
 fun ExerciseEntity.toModel() = Exercise(
     id = id,
-    identifier= identifier,
+    identifier = identifier,
     name = name,
     description = description,
     group = group?.toModel()
@@ -42,7 +45,7 @@ fun ExerciseEntity.toModel() = Exercise(
 
 fun Exercise.toEntity() = ExerciseEntity(
     id = id,
-    identifier= identifier,
+    identifier = identifier,
     name = name,
     description = description,
     group = group?.toEntity()
