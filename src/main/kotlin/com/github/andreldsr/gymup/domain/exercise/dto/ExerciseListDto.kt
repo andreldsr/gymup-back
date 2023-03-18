@@ -9,6 +9,6 @@ data class ExerciseListDto(
 )
 
 fun Exercise.toListDto() = ExerciseListDto(
-    identifier,
-    name
+    identifier, name
 )
+

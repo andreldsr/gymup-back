@@ -8,5 +8,6 @@ interface ExerciseGateway {
     fun delete(identifier: UUID)
     fun findAll(): List<Exercise>
     fun findByIdentifier(identifier: UUID): Exercise
+    fun findAllByIdentifier(identifiers: List<UUID>): List<Exercise>
     fun findByMuscleGroup(identifier: UUID): List<Exercise>
 }

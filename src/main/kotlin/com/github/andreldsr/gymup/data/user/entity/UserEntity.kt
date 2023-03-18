@@ -15,16 +15,16 @@ import java.time.LocalDateTime
 import java.util.UUID
 
 @Entity
-@Table(name = "user")
+@Table(name = "\"user\"")
 class UserEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
     val identifier: UUID = UUID.randomUUID(),
-    val name: String,
+    val name: String = "",
     @Column(unique = true)
-    val email: String,
-    val password: String,
+    val email: String = "",
+    val password: String = "",
     @ManyToMany(fetch = FetchType.LAZY)
     var roles: MutableSet<RoleEntity> = mutableSetOf(),
     @CreatedDate

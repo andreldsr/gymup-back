@@ -6,5 +6,6 @@ import java.util.UUID
 
 interface ExerciseRepository : JpaRepository<ExerciseEntity, Long> {
     fun findByIdentifier(identifier: UUID): ExerciseEntity?
+    fun findAllByIdentifierIn(identifiers: List<UUID>): List<ExerciseEntity>
     fun findAllByGroupIdentifier(identifier: UUID): List<ExerciseEntity>
 }

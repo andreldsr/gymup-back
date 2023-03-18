@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import java.util.UUID
 
-@RestController
+@RestController("User")
 @RequestMapping("/user")
 class UserController(private val userService: UserService) {
     @PostMapping

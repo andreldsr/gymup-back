@@ -8,5 +8,6 @@ class GymupApplicationTests {
 
     @Test
     fun contextLoads() {
+        assert(true)
     }
 }

@@ -33,6 +33,10 @@ class ExerciseDatasource(
         return exerciseRepository.findByIdentifier(identifier)?.toModel() ?: throw ExerciseNotFoundException(identifier)
     }
 
+    override fun findAllByIdentifier(identifiers: List<UUID>): List<Exercise> {
+        return exerciseRepository.findAllByIdentifierIn(identifiers).map { it.toModel() }
+    }
+
     override fun findByMuscleGroup(identifier: UUID): List<Exercise> {
         return exerciseRepository.findAllByGroupIdentifier(identifier).map { it.toModel() }
     }
