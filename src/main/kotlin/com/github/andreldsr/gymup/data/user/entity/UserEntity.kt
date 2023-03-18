@@ -1,5 +1,7 @@
 package com.github.andreldsr.gymup.data.user.entity
 
+import com.github.andreldsr.gymup.domain.user.form.UserCreateForm
+import com.github.andreldsr.gymup.domain.user.form.toModel
 import com.github.andreldsr.gymup.domain.user.model.User
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
@@ -42,3 +44,4 @@ class UserEntity(
 
 fun UserEntity.toModel() = User(id, identifier, name, email, password)
 fun User.toEntity() = UserEntity(id, identifier, name, email, password)
+fun UserCreateForm.toEntity() = toModel().toEntity()

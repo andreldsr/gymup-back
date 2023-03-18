@@ -1,5 +1,7 @@
 package com.github.andreldsr.gymup.data.user.entity
 
+import com.github.andreldsr.gymup.domain.user.form.RoleCreateForm
+import com.github.andreldsr.gymup.domain.user.form.toModel
 import com.github.andreldsr.gymup.domain.user.model.Role
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
@@ -35,3 +37,5 @@ data class RoleEntity(
 fun RoleEntity.toModel() = Role(id, identifier, name)
 
 fun Role.toEntity() = RoleEntity(id, identifier, name)
+
+fun RoleCreateForm.toEntity() = toModel().toEntity()

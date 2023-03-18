@@ -1,5 +1,7 @@
 package com.github.andreldsr.gymup.data.exercise.entity
 
+import com.github.andreldsr.gymup.domain.exercise.form.ExtraCreateForm
+import com.github.andreldsr.gymup.domain.exercise.form.toModel
 import com.github.andreldsr.gymup.domain.exercise.model.Extra
 import com.github.andreldsr.gymup.domain.exercise.model.ExtraType
 import jakarta.persistence.Column
@@ -46,3 +48,4 @@ fun Extra.toEntity() = ExtraEntity(
     type,
     exercise.toEntity()
 )
+fun ExtraCreateForm.toEntity() = toModel().toEntity()

@@ -4,6 +4,8 @@ import com.github.andreldsr.gymup.data.exercise.entity.ExerciseEntity
 import com.github.andreldsr.gymup.data.exercise.entity.toEntity
 import com.github.andreldsr.gymup.data.exercise.entity.toModel
 import com.github.andreldsr.gymup.data.user.entity.UserEntity
+import com.github.andreldsr.gymup.domain.workoutplan.form.WorkoutPlanCreateForm
+import com.github.andreldsr.gymup.domain.workoutplan.form.toModel
 import com.github.andreldsr.gymup.domain.workoutplan.model.WorkoutPlan
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
@@ -37,3 +39,5 @@ fun WorkoutPlanEntity.toModel() = WorkoutPlan(
 fun WorkoutPlan.toEntity() = WorkoutPlanEntity(
     id, identifier, name, UserEntity(identifier = identifier),active, exercises.map { it.toEntity() }
 )
+
+fun WorkoutPlanCreateForm.toEntity() = toModel().toEntity()

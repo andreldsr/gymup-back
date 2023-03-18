@@ -1,5 +1,7 @@
 package com.github.andreldsr.gymup.data.musclegroup.entity
 
+import com.github.andreldsr.gymup.domain.musclegroup.form.MuscleGroupCreateForm
+import com.github.andreldsr.gymup.domain.musclegroup.form.toModel
 import com.github.andreldsr.gymup.domain.musclegroup.model.MuscleGroup
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
@@ -37,3 +39,5 @@ fun MuscleGroup.toEntity() = MuscleGroupEntity(
     identifier = identifier,
     name = name
 )
+
+fun MuscleGroupCreateForm.toEntity() = toModel().toEntity()

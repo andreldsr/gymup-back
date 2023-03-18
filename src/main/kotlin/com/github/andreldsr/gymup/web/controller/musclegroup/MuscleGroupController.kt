@@ -29,5 +29,6 @@ class MuscleGroupController(private val muscleGroupService: MuscleGroupService) 
 
     @DeleteMapping("/{identifier}")
     @Operation(tags = ["Muscle Group"], description = "Delete muscle group")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     fun delete(@PathVariable identifier: UUID) = muscleGroupService.delete(identifier)
 }

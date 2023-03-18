@@ -3,6 +3,8 @@ package com.github.andreldsr.gymup.data.exercise.entity
 import com.github.andreldsr.gymup.data.musclegroup.entity.MuscleGroupEntity
 import com.github.andreldsr.gymup.data.musclegroup.entity.toEntity
 import com.github.andreldsr.gymup.data.musclegroup.entity.toModel
+import com.github.andreldsr.gymup.domain.exercise.form.ExerciseCreateForm
+import com.github.andreldsr.gymup.domain.exercise.form.toModel
 import com.github.andreldsr.gymup.domain.exercise.model.Exercise
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
@@ -50,3 +52,5 @@ fun Exercise.toEntity() = ExerciseEntity(
     description = description,
     group = group?.toEntity()
 )
+
+fun ExerciseCreateForm.toEntity() = toModel().toEntity()
