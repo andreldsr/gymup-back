@@ -6,14 +6,14 @@ import com.github.andreldsr.gymup.data.musclegroup.repository.MuscleGroupReposit
 import com.github.andreldsr.gymup.domain.musclegroup.dto.MuscleGroupListDto
 import com.github.andreldsr.gymup.domain.musclegroup.dto.toListDto
 import com.github.andreldsr.gymup.domain.musclegroup.exception.MuscleGroupNotFoundException
-import com.github.andreldsr.gymup.domain.musclegroup.form.MuscleGroupCreateForm
+import com.github.andreldsr.gymup.domain.musclegroup.model.MuscleGroup
 import com.github.andreldsr.gymup.gateway.musclegroup.MuscleGroupGateway
 import org.springframework.stereotype.Repository
 import java.util.UUID
 
 @Repository
 class MuscleGroupDatasource(private val muscleGroupRepository: MuscleGroupRepository) : MuscleGroupGateway {
-    override fun create(muscleGroup: MuscleGroupCreateForm): MuscleGroupListDto {
+    override fun create(muscleGroup: MuscleGroup): MuscleGroupListDto {
         return muscleGroupRepository.save(muscleGroup.toEntity()).toModel().toListDto()
     }
 

@@ -4,6 +4,7 @@ import com.github.andreldsr.gymup.domain.workoutplan.dto.WorkoutPlanDetailDto
 import com.github.andreldsr.gymup.domain.workoutplan.dto.WorkoutPlanListDto
 import com.github.andreldsr.gymup.domain.workoutplan.dto.toDetailDto
 import com.github.andreldsr.gymup.domain.workoutplan.form.WorkoutPlanCreateForm
+import com.github.andreldsr.gymup.domain.workoutplan.form.toModel
 import com.github.andreldsr.gymup.gateway.exercise.ExerciseGateway
 import com.github.andreldsr.gymup.gateway.user.UserGateway
 import com.github.andreldsr.gymup.gateway.workoutplan.WorkoutPlanGateway
@@ -20,7 +21,8 @@ class WorkoutPlanServiceImpl(
     override fun create(workoutPlanCreateForm: WorkoutPlanCreateForm): WorkoutPlanDetailDto {
         val user = userGateway.findByIdentifier(workoutPlanCreateForm.userIdentifier)
         val exercises = exerciGateway.findAllByIdentifier(workoutPlanCreateForm.exercises.map { it.identifier })
-        return workoutPlanGateway.create(workoutPlanCreateForm, user, exercises).toDetailDto()
+        return workoutPlanGateway.create(workoutPlanCreateForm.toModel().copy(exercises = exercises), user)
+            .toDetailDto()
     }
 
     override fun findByIdentifier(identifier: UUID): WorkoutPlanDetailDto {

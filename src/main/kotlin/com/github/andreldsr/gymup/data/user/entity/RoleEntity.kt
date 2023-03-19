@@ -29,10 +29,24 @@ data class RoleEntity(
     @CreatedDate
     @Column(name = "created_at")
     val createdAt: LocalDateTime = LocalDateTime.now(),
-    @UpdateTimestamp
-    @Column(name = "updated_at")
+    @Column(name = "updated_at") @UpdateTimestamp
     val updatedAt: LocalDateTime = LocalDateTime.now()
-)
+) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+        other as RoleEntity
+        return id == other.id
+    }
+
+    override fun hashCode(): Int {
+        return id.hashCode()
+    }
+
+    override fun toString(): String {
+        return "id => $id || identifier => $identifier || name => $name"
+    }
+}
 
 fun RoleEntity.toModel() = Role(id, identifier, name)
 

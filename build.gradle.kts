@@ -9,13 +9,14 @@ plugins {
     kotlin("plugin.jpa") version "1.7.22"
     id("org.flywaydb.flyway") version "9.8.1"
     id("org.jmailen.kotlinter") version "3.13.0"
+    id("org.graalvm.buildtools.native") version "0.9.20"
 }
 
 group = "com.github.andreldsr"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
-val openapiVersion = "2.0.2"
+val openapiVersion = "2.0.4"
 val hibernateValidatorVersion = "8.0.0.Final"
 
 configurations {
@@ -35,9 +36,11 @@ dependencies {
 //    implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+    implementation ("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.flywaydb:flyway-core")
+    implementation("org.springdoc:springdoc-openapi-starter-common:$openapiVersion")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:$openapiVersion")
     implementation("org.hibernate:hibernate-validator:$hibernateValidatorVersion")
     developmentOnly("org.springframework.boot:spring-boot-devtools")

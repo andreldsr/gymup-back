@@ -5,14 +5,14 @@ import com.github.andreldsr.gymup.data.user.entity.toModel
 import com.github.andreldsr.gymup.data.user.repository.RoleRepository
 import com.github.andreldsr.gymup.domain.user.dto.RoleListDto
 import com.github.andreldsr.gymup.domain.user.dto.toListDto
-import com.github.andreldsr.gymup.domain.user.form.RoleCreateForm
+import com.github.andreldsr.gymup.domain.user.model.Role
 import com.github.andreldsr.gymup.gateway.user.RoleGateway
 import org.springframework.stereotype.Repository
 import java.util.UUID
 
 @Repository
 class RoleDatasource(private val roleRepository: RoleRepository) : RoleGateway {
-    override fun create(role: RoleCreateForm): RoleListDto {
+    override fun create(role: Role): RoleListDto {
         return roleRepository.save(role.toEntity()).toModel().toListDto()
     }
 

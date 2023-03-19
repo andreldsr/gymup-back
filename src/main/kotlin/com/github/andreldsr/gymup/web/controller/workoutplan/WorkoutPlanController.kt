@@ -21,16 +21,20 @@ class WorkoutPlanController(val workoutPlanService: WorkoutPlanService) {
     @Operation(tags = ["Workout Plan"], description = "Create new workout plan")
     @ResponseStatus(HttpStatus.CREATED)
     fun create(@RequestBody workoutPlanCreateForm: WorkoutPlanCreateForm) = workoutPlanService.create(workoutPlanCreateForm)
+
     @GetMapping("/{identifier}")
     @Operation(tags = ["Workout Plan"], description = "Find workout plan by identifier")
     fun findByIdentifier(@PathVariable identifier: UUID) = workoutPlanService.findByIdentifier(identifier)
+
     @GetMapping("/user/{identifier}")
     @Operation(tags = ["Workout Plan"], description = "Find workout plan list by user identifier")
     fun findActiveByUserIdentifier(@PathVariable identifier: UUID) = workoutPlanService.findActiveByUserIdentifier(identifier)
+
     @DeleteMapping("/delete/{identifier}")
     @Operation(tags = ["Workout Plan"], description = "Delete workout plan by identifier")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun delete(@PathVariable identifier: UUID) = workoutPlanService.delete(identifier)
+
     @DeleteMapping("/{identifier}")
     @Operation(tags = ["Workout Plan"], description = "Deactivate workout plan by identifier")
     @ResponseStatus(HttpStatus.NO_CONTENT)

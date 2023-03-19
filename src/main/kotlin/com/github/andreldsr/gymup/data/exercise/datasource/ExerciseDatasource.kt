@@ -9,7 +9,6 @@ import com.github.andreldsr.gymup.domain.exercise.dto.ExerciseListDto
 import com.github.andreldsr.gymup.domain.exercise.dto.toDetailDto
 import com.github.andreldsr.gymup.domain.exercise.dto.toListDto
 import com.github.andreldsr.gymup.domain.exercise.exception.ExerciseNotFoundException
-import com.github.andreldsr.gymup.domain.exercise.form.ExerciseCreateForm
 import com.github.andreldsr.gymup.domain.exercise.model.Exercise
 import com.github.andreldsr.gymup.gateway.exercise.ExerciseGateway
 import org.springframework.stereotype.Repository
@@ -20,8 +19,8 @@ class ExerciseDatasource(
     private val exerciseRepository: ExerciseRepository,
     private val muscleGroupRepository: MuscleGroupRepository
 ) : ExerciseGateway {
-    override fun create(exercise: ExerciseCreateForm): ExerciseDetailDto {
-        val muscleGroup = muscleGroupRepository.findByIdentifier(exercise.muscleGroupIdentifier)
+    override fun create(exercise: Exercise): ExerciseDetailDto {
+        val muscleGroup = muscleGroupRepository.findByIdentifier(exercise.group!!.identifier)
         return exerciseRepository.save(
             exercise
                 .toEntity()

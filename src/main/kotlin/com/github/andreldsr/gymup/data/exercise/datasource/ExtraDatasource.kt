@@ -8,7 +8,7 @@ import com.github.andreldsr.gymup.domain.exercise.dto.ExtraListDto
 import com.github.andreldsr.gymup.domain.exercise.dto.toListDto
 import com.github.andreldsr.gymup.domain.exercise.exception.ExerciseNotFoundException
 import com.github.andreldsr.gymup.domain.exercise.exception.ExtraNotFoundException
-import com.github.andreldsr.gymup.domain.exercise.form.ExtraCreateForm
+import com.github.andreldsr.gymup.domain.exercise.model.Extra
 import com.github.andreldsr.gymup.gateway.exercise.ExtraGateway
 import org.springframework.stereotype.Repository
 import java.util.UUID
@@ -18,14 +18,14 @@ class ExtraDatasource(
     private val extraRepository: ExtraRepository,
     private val exerciseRepository: ExerciseRepository
 ) : ExtraGateway {
-    override fun create(extra: ExtraCreateForm): ExtraListDto {
-        val exercise = exerciseRepository.findByIdentifier(extra.exerciseIdentifier) ?: throw ExerciseNotFoundException(
-            extra.exerciseIdentifier
+    override fun create(extra: Extra): ExtraListDto {
+        val exercise = exerciseRepository.findByIdentifier(extra.exercise.identifier) ?: throw ExerciseNotFoundException(
+            extra.exercise.identifier
         )
         return extraRepository.save(
             extra
-            .toEntity()
-            .copy(exercise = exercise)
+                .toEntity()
+                .copy(exercise = exercise)
         ).toModel().toListDto()
     }
 

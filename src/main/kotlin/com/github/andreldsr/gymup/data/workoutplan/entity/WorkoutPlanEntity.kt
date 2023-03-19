@@ -20,7 +20,8 @@ import java.util.UUID
 @Entity
 @Table(name = "workout_plan")
 data class WorkoutPlanEntity(
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long,
     val identifier: UUID,
     val name: String,
@@ -30,14 +31,39 @@ data class WorkoutPlanEntity(
     val active: Boolean,
     @ManyToMany
     val exercises: List<ExerciseEntity>
-)
+) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+        other as WorkoutPlanEntity
+        return id == other.id
+    }
+
+    override fun hashCode(): Int {
+        return id.hashCode()
+    }
+
+    override fun toString(): String {
+        return "id => $id || identifier => $identifier || name => $name"
+    }
+}
 
 fun WorkoutPlanEntity.toModel() = WorkoutPlan(
-    id, identifier, name, user.identifier, active, exercises.map { it.toModel() }
+    id,
+    identifier,
+    name,
+    user.identifier,
+    active,
+    exercises.map { it.toModel() }
 )
 
 fun WorkoutPlan.toEntity() = WorkoutPlanEntity(
-    id, identifier, name, UserEntity(identifier = identifier),active, exercises.map { it.toEntity() }
+    id,
+    identifier,
+    name,
+    UserEntity(identifier = identifier),
+    active,
+    exercises.map { it.toEntity() }
 )
 
 fun WorkoutPlanCreateForm.toEntity() = toModel().toEntity()

@@ -10,6 +10,9 @@ services:
       - postgres-volume:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-
+  adminer:
+    image: adminer
+    ports:
+      - 9090:8080
 volumes:
   postgres-volume:

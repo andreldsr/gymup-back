@@ -9,5 +9,6 @@ data class WorkoutPlanListDto(
 )
 
 fun WorkoutPlan.toListDto() = WorkoutPlanListDto(
-    name, identifier
+    name,
+    identifier
 )

@@ -5,6 +5,7 @@ import com.github.andreldsr.gymup.domain.exercise.dto.ExerciseListDto
 import com.github.andreldsr.gymup.domain.exercise.dto.ExtraListDto
 import com.github.andreldsr.gymup.domain.exercise.form.ExerciseCreateForm
 import com.github.andreldsr.gymup.domain.exercise.form.ExtraCreateForm
+import com.github.andreldsr.gymup.domain.exercise.form.toModel
 import com.github.andreldsr.gymup.gateway.exercise.ExerciseGateway
 import com.github.andreldsr.gymup.gateway.exercise.ExtraGateway
 import com.github.andreldsr.gymup.service.ExerciseService
@@ -14,11 +15,12 @@ import java.util.UUID
 @Service
 class ExerciseServiceImpl(private val exerciseDatasource: ExerciseGateway, private val extraDatasource: ExtraGateway) : ExerciseService {
     override fun create(exerciseCreateForm: ExerciseCreateForm): ExerciseDetailDto {
-        return exerciseDatasource.create(exerciseCreateForm)
+        println("Teste")
+        return exerciseDatasource.create(exerciseCreateForm.toModel())
     }
 
     override fun addExtra(extraCreateForm: ExtraCreateForm): ExtraListDto {
-        return extraDatasource.create(extraCreateForm)
+        return extraDatasource.create(extraCreateForm.toModel())
     }
 
     override fun removeExtra(identifier: UUID) {

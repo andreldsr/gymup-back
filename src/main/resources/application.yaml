@@ -20,6 +20,11 @@ spring:
     hikari:
       pool-name: gymup-connection-pool
       maximum-pool-size: 10
+
 springdoc:
-  api-docs:
-    enabled: true
+  enable-native-support: true
+
+management:
+  endpoint:
+    info:
+      enabled: true
