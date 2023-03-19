@@ -29,7 +29,22 @@ data class ExtraEntity(
     val type: ExtraType,
     @ManyToOne
     val exercise: ExerciseEntity
-)
+) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+        other as ExtraEntity
+        return id == other.id
+    }
+
+    override fun hashCode(): Int {
+        return id.hashCode()
+    }
+
+    override fun toString(): String {
+        return "id => $id || identifier => $identifier || description => $description"
+    }
+}
 
 fun ExtraEntity.toModel() = Extra(
     id,

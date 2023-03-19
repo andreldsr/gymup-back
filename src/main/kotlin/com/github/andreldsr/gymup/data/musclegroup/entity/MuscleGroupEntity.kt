@@ -26,7 +26,22 @@ data class MuscleGroupEntity(
     val createdAt: LocalDateTime = LocalDateTime.now(),
     @Column(name = "updated_at") @UpdateTimestamp
     val updatedAt: LocalDateTime = LocalDateTime.now()
-)
+) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+        other as MuscleGroupEntity
+        return id == other.id
+    }
+
+    override fun hashCode(): Int {
+        return id.hashCode()
+    }
+
+    override fun toString(): String {
+        return "id => $id || identifier => $identifier || name => $name"
+    }
+}
 
 fun MuscleGroupEntity.toModel() = MuscleGroup(
     id = id,
