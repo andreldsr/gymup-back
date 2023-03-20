@@ -2,6 +2,7 @@ package com.github.andreldsr.gymup.data.exercise.datasource
 
 import com.github.andreldsr.gymup.data.exercise.entity.toEntity
 import com.github.andreldsr.gymup.data.exercise.entity.toModel
+import com.github.andreldsr.gymup.data.exercise.projections.toDto
 import com.github.andreldsr.gymup.data.exercise.repository.ExerciseRepository
 import com.github.andreldsr.gymup.data.exercise.repository.ExtraRepository
 import com.github.andreldsr.gymup.domain.exercise.dto.ExtraListDto
@@ -19,9 +20,10 @@ class ExtraDatasource(
     private val exerciseRepository: ExerciseRepository
 ) : ExtraGateway {
     override fun create(extra: Extra): ExtraListDto {
-        val exercise = exerciseRepository.findByIdentifier(extra.exercise.identifier) ?: throw ExerciseNotFoundException(
-            extra.exercise.identifier
-        )
+        val exercise =
+            exerciseRepository.findByIdentifier(extra.exercise.identifier) ?: throw ExerciseNotFoundException(
+                extra.exercise.identifier
+            )
         return extraRepository.save(
             extra
                 .toEntity()
@@ -35,6 +37,6 @@ class ExtraDatasource(
     }
 
     override fun findByExerciseIdentifier(identifier: UUID): List<ExtraListDto> {
-        return extraRepository.findByExerciseIdentifier(identifier).map { it.toModel().toListDto() }
+        return extraRepository.findListByExerciseIdentifier(identifier).map { it.toDto() }
     }
 }

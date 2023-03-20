@@ -36,13 +36,7 @@ class ExerciseServiceImpl(private val exerciseDatasource: ExerciseGateway, priva
     }
 
     override fun findByIdentifier(identifier: UUID): ExerciseDetailDto? {
-        val detailDto = exerciseDatasource.findByIdentifier(identifier)
-        return detailDto.copy(extras = getExtras(identifier))
-    }
-
-    private fun getExtras(identifier: UUID): Map<String, List<ExtraListDto>> {
-        val extras = extraDatasource.findByExerciseIdentifier(identifier)
-        return extras.groupBy { it.type.name }
+        return exerciseDatasource.findByIdentifier(identifier)
     }
 
     override fun findByMuscleGroup(identifier: UUID): List<ExerciseListDto> {

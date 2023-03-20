@@ -3,12 +3,11 @@ package com.github.andreldsr.gymup.data.workoutplan.datasource
 import com.github.andreldsr.gymup.data.user.entity.toEntity
 import com.github.andreldsr.gymup.data.workoutplan.entity.toEntity
 import com.github.andreldsr.gymup.data.workoutplan.entity.toModel
+import com.github.andreldsr.gymup.data.workoutplan.projections.toDto
 import com.github.andreldsr.gymup.data.workoutplan.repository.WorkoutPlanRepository
 import com.github.andreldsr.gymup.domain.user.model.User
 import com.github.andreldsr.gymup.domain.workoutplan.dto.WorkoutPlanDetailDto
 import com.github.andreldsr.gymup.domain.workoutplan.dto.WorkoutPlanListDto
-import com.github.andreldsr.gymup.domain.workoutplan.dto.toDetailDto
-import com.github.andreldsr.gymup.domain.workoutplan.dto.toListDto
 import com.github.andreldsr.gymup.domain.workoutplan.model.WorkoutPlan
 import com.github.andreldsr.gymup.gateway.workoutplan.WorkoutPlanGateway
 import org.springframework.stereotype.Repository
@@ -29,11 +28,11 @@ class WorkoutPlanDatasource(val workoutPlanRepository: WorkoutPlanRepository) : 
     }
 
     override fun findActiveByUserIdentifier(identifier: UUID): List<WorkoutPlanListDto> {
-        return workoutPlanRepository.findByUserIdentifierAndActiveIsTrue(identifier).map { it.toModel().toListDto() }
+        return workoutPlanRepository.findByUserIdentifierAndActiveIsTrue(identifier).map { it.toDto() }
     }
 
     override fun findByIdentifier(identifier: UUID): WorkoutPlanDetailDto {
-        return workoutPlanRepository.findByIdentifier(identifier).toModel().toDetailDto()
+        return workoutPlanRepository.findDetailByIdentifier(identifier).toDto()
     }
 
     override fun deactivate(identifier: UUID) {
