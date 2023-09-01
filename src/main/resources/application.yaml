@@ -14,17 +14,27 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/gymup
+    url: ${ENV_JDBC_URL:jdbc:postgresql://localhost:5432/gymup}
     username: gymup
     password: gymup
     hikari:
       pool-name: gymup-connection-pool
       maximum-pool-size: 10
+  mvc:
+    problemdetails:
+      enabled: true
+
 
 springdoc:
   enable-native-support: true
 
 management:
   endpoint:
-    info:
-      enabled: true
+    health:
+      probes:
+        enabled: true
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"

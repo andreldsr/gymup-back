@@ -9,6 +9,7 @@ import com.github.andreldsr.gymup.domain.exercise.form.toModel
 import com.github.andreldsr.gymup.domain.exercise.model.Exercise
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
+import jakarta.persistence.FetchType
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
@@ -29,7 +30,7 @@ data class ExerciseEntity(
     val identifier: UUID,
     val name: String,
     val description: String,
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     val group: MuscleGroupEntity? = null,
     @CreatedDate
     @Column(name = "created_at")

@@ -9,5 +9,5 @@ data class WorkoutPlan(
     val name: String,
     val userIdentifier: UUID,
     val active: Boolean = true,
-    val exercises: List<Exercise> = listOf()
+    val exercises: List<WorkoutExercise> = listOf()
 )

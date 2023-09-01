@@ -7,12 +7,18 @@ interface ExerciseDetailProjectionDto {
     fun getIdentifier(): UUID
     fun getName(): String
     fun getDescription(): String
-    fun getGroupName(): String
+    fun getGroup(): ExerciseGroupProjectionDto
+    fun getExtras(): List<ExtraListProjectionDto>
+}
+
+interface ExerciseGroupProjectionDto{
+    fun getName(): String
 }
 
 fun ExerciseDetailProjectionDto.toDto() = ExerciseDetailDto(
     getIdentifier(),
     getName(),
     getDescription(),
-    getGroupName()
+    getGroup().getName(),
+    getExtras().map { it.toDto() }.groupBy { it.type.name }
 )

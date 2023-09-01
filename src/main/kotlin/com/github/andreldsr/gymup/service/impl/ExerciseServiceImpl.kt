@@ -15,7 +15,6 @@ import java.util.UUID
 @Service
 class ExerciseServiceImpl(private val exerciseDatasource: ExerciseGateway, private val extraDatasource: ExtraGateway) : ExerciseService {
     override fun create(exerciseCreateForm: ExerciseCreateForm): ExerciseDetailDto {
-        println("Teste")
         return exerciseDatasource.create(exerciseCreateForm.toModel())
     }
 

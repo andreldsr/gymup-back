@@ -5,10 +5,12 @@ import java.util.UUID
 
 data class ExerciseListDto(
     val identifier: UUID,
-    val name: String
+    val name: String,
+    val group: String
 )
 
 fun Exercise.toListDto() = ExerciseListDto(
     identifier,
-    name
+    name,
+    group?.name?:""
 )

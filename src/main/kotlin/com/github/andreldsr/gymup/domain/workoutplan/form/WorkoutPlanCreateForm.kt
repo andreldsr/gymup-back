@@ -7,7 +7,7 @@ import java.util.UUID
 data class WorkoutPlanCreateForm(
     val name: String,
     val userIdentifier: UUID,
-    val exercises: List<ExerciseListDto>
+    val exercises: List<WorkoutExerciseCreateForm>
 )
 
 fun WorkoutPlanCreateForm.toModel() = WorkoutPlan(

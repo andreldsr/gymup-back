@@ -8,17 +8,23 @@ CREATE TABLE workout_plan
     CONSTRAINT pk_workout_plan PRIMARY KEY (id)
 );
 
-CREATE TABLE workout_plan_exercises
+CREATE TABLE workout_plan_exercise
 (
-    workout_plan_entity_id BIGINT NOT NULL,
-    exercises_id           BIGINT NOT NULL
+    workout_plan_id BIGINT NOT NULL,
+    exercise_id           BIGINT NOT NULL,
+    sets                   BIGINT,
+    repetitions            BIGINT
 );
+
+create unique index if not exists workout_plan_identifier_index on workout_plan(identifier);
 
 ALTER TABLE workout_plan
     ADD CONSTRAINT FK_WORKOUT_PLAN_ON_USER FOREIGN KEY (user_id) REFERENCES "user" (id);
 
-ALTER TABLE workout_plan_exercises
-    ADD CONSTRAINT fk_worplaexe_on_exercise_entity FOREIGN KEY (exercises_id) REFERENCES exercise (id);
+ALTER TABLE workout_plan_exercise
+    ADD CONSTRAINT fk_worplaexe_on_exercise_entity FOREIGN KEY (exercise_id) REFERENCES exercise (id);
 
-ALTER TABLE workout_plan_exercises
-    ADD CONSTRAINT fk_worplaexe_on_workout_plan_entity FOREIGN KEY (workout_plan_entity_id) REFERENCES workout_plan (id);
+ALTER TABLE workout_plan_exercise
+    ADD CONSTRAINT fk_worplaexe_on_workout_plan_entity FOREIGN KEY (workout_plan_id) REFERENCES workout_plan (id);
+
+create unique index if not exists workout_plan_exercise_identifier_index on workout_plan_exercise(exercise_id, workout_plan_id);

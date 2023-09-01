@@ -6,9 +6,11 @@ import java.util.UUID
 interface ExerciseListProjectionDto {
     fun getIdentifier(): UUID
     fun getName(): String
+    fun getGroup(): ExerciseGroupProjectionDto
 }
 
 fun ExerciseListProjectionDto.toDto() = ExerciseListDto(
     getIdentifier(),
-    getName()
+    getName(),
+    getGroup().getName()
 )

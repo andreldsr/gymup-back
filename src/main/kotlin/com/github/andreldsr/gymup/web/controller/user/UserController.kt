@@ -2,6 +2,7 @@ package com.github.andreldsr.gymup.web.controller.user
 
 import com.github.andreldsr.gymup.domain.user.form.UserCreateForm
 import com.github.andreldsr.gymup.service.UserService
+import io.micrometer.observation.annotation.Observed
 import io.swagger.v3.oas.annotations.Operation
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -27,6 +28,7 @@ class UserController(private val userService: UserService) {
     fun findByIdentifier(@PathVariable identifier: UUID) = userService.findByIdentifier(identifier)
 
     @GetMapping("/email/{email}")
+    @Observed(name = "user-findByEmail", contextualName = "user")
     @Operation(tags = ["User"], description = "Find user by email")
     fun findByEmail(@PathVariable email: String) = userService.findByEmail(email)
 

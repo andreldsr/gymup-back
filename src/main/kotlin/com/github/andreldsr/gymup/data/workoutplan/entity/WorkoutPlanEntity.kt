@@ -1,19 +1,18 @@
 package com.github.andreldsr.gymup.data.workoutplan.entity
 
-import com.github.andreldsr.gymup.data.exercise.entity.ExerciseEntity
-import com.github.andreldsr.gymup.data.exercise.entity.toEntity
-import com.github.andreldsr.gymup.data.exercise.entity.toModel
 import com.github.andreldsr.gymup.data.user.entity.UserEntity
 import com.github.andreldsr.gymup.domain.workoutplan.form.WorkoutPlanCreateForm
 import com.github.andreldsr.gymup.domain.workoutplan.form.toModel
 import com.github.andreldsr.gymup.domain.workoutplan.model.WorkoutPlan
+import jakarta.persistence.CascadeType
 import jakarta.persistence.Entity
+import jakarta.persistence.FetchType
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
-import jakarta.persistence.ManyToMany
 import jakarta.persistence.ManyToOne
+import jakarta.persistence.OneToMany
 import jakarta.persistence.Table
 import java.util.UUID
 
@@ -23,14 +22,14 @@ data class WorkoutPlanEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long,
-    val identifier: UUID,
-    val name: String,
-    @ManyToOne
+    val identifier: UUID = UUID.randomUUID(),
+    val name: String = "",
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     val user: UserEntity,
-    val active: Boolean,
-    @ManyToMany
-    val exercises: List<ExerciseEntity>
+    val active: Boolean = true,
+    @OneToMany(mappedBy = "workoutPlan", cascade = [CascadeType.ALL], orphanRemoval = true)
+    var exercises: List<WorkoutPlanExerciseEntity> = listOf()
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -53,8 +52,7 @@ fun WorkoutPlanEntity.toModel() = WorkoutPlan(
     identifier,
     name,
     user.identifier,
-    active,
-    exercises.map { it.toModel() }
+    active
 )
 
 fun WorkoutPlan.toEntity() = WorkoutPlanEntity(
@@ -62,8 +60,7 @@ fun WorkoutPlan.toEntity() = WorkoutPlanEntity(
     identifier,
     name,
     UserEntity(identifier = identifier),
-    active,
-    exercises.map { it.toEntity() }
+    active
 )
 
 fun WorkoutPlanCreateForm.toEntity() = toModel().toEntity()

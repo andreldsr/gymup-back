@@ -8,6 +8,7 @@ import com.github.andreldsr.gymup.data.workoutplan.repository.WorkoutPlanReposit
 import com.github.andreldsr.gymup.domain.user.model.User
 import com.github.andreldsr.gymup.domain.workoutplan.dto.WorkoutPlanDetailDto
 import com.github.andreldsr.gymup.domain.workoutplan.dto.WorkoutPlanListDto
+import com.github.andreldsr.gymup.domain.workoutplan.exception.WorkoutPlanNotFoundException
 import com.github.andreldsr.gymup.domain.workoutplan.model.WorkoutPlan
 import com.github.andreldsr.gymup.gateway.workoutplan.WorkoutPlanGateway
 import org.springframework.stereotype.Repository
@@ -16,11 +17,9 @@ import java.util.UUID
 @Repository
 class WorkoutPlanDatasource(val workoutPlanRepository: WorkoutPlanRepository) : WorkoutPlanGateway {
     override fun create(workoutPlan: WorkoutPlan, user: User): WorkoutPlan {
-        return workoutPlanRepository.save(
-            workoutPlan
-                .toEntity()
-                .copy(user = user.toEntity())
-        ).toModel()
+        val entity = workoutPlan.toEntity().copy(user = user.toEntity())
+        entity.exercises = workoutPlan.exercises.map { e -> e.toEntity().copy(workoutPlan = entity) }
+        return workoutPlanRepository.save(entity).toModel()
     }
 
     override fun delete(identifier: UUID) {
@@ -32,7 +31,8 @@ class WorkoutPlanDatasource(val workoutPlanRepository: WorkoutPlanRepository) : 
     }
 
     override fun findByIdentifier(identifier: UUID): WorkoutPlanDetailDto {
-        return workoutPlanRepository.findDetailByIdentifier(identifier).toDto()
+        return workoutPlanRepository.findDetailByIdentifier(identifier)?.toDto()
+            ?: throw WorkoutPlanNotFoundException(identifier)
     }
 
     override fun deactivate(identifier: UUID) {

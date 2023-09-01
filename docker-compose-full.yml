@@ -1,0 +1,35 @@
+version: "3.7"
+services:
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: gymup
+      POSTGRES_PASSWORD: gymup
+      POSTGRES_DB: gymup
+    volumes:
+      - postgres-volume:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - gymupnetwork
+  adminer:
+    image: adminer
+    ports:
+      - "9090:8080"
+    depends_on:
+      - postgres
+  gymup-exercises:
+    image: gymup:0.0.1-SNAPSHOT
+    environment:
+      ENV_PROFILE: prod
+      ENV_JDBC_URL: jdbc:postgresql://postgres:5432/gymup
+    ports:
+      - "8080:8080"
+    networks:
+      - gymupnetwork
+    depends_on:
+      - postgres
+networks:
+  gymupnetwork:
+volumes:
+  postgres-volume:
